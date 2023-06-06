@@ -1,12 +1,16 @@
 #include "mbed.h"
-
-DigitalOut myled(LED1);
-
-int main() {
-  while(1) {
-    myled = 1;
-    wait(0.2);
-    myled = 0;
-    wait(0.2);
-  }
+Serial pc(USBTX,USBRX,9600);
+int main()
+{
+    char a,b;
+    a = 'A';
+    pc.putc(a);
+    for(int i=0;i<10;i++) {
+        pc.printf("\r\n i=%d -- press any key -->",i);
+        b = pc.getc();
+        pc.putc(b);
+        wait_ms(500);
+    }
+    pc.printf("\r\n End of program\r\n");
 }
+   
